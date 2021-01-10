@@ -27,7 +27,7 @@ type Ingridient struct {
 }
 
 func (model *Model) BeforeCreate(scope *gorm.Scope) error {
-	uuid, _ := uuid.NewV4();
+	uuid := uuid.NewV4()
 	return scope.SetColumn("ID", Str(uuid))
 }
 
