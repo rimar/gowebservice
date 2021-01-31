@@ -1,0 +1,1 @@
+nohup ./gowebservice > /tmp/gws.log 2>&1 &
