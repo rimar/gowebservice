@@ -7,6 +7,7 @@ import (
 )
 
 func main() {
+	initJob()
 	router := NewRouter()
 	port := 8383
 	fmt.Printf("Initializing the database\n")

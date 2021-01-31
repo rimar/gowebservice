@@ -1,10 +1,22 @@
 package main
 
 import (
-	"log"
 	"net/http"
 	"time"
 )
+import "github.com/sirupsen/logrus"
+
+var logger *logrus.Entry
+
+func init() {
+	logger = logrus.WithFields(logrus.Fields{
+		"component": "gowebsvc",
+	})
+
+	logrus.SetFormatter(&logrus.TextFormatter{
+		FullTimestamp: true,
+	})
+}
 
 // Make a wrapper for ResonseWriter to be able to sava and later print the response code
 type LoggingWriter struct {
@@ -23,7 +35,7 @@ func Logger(inner http.Handler, name string) http.Handler {
 		lw := &LoggingWriter{w, 0}
 		inner.ServeHTTP(lw, r)
 
-		log.Printf(
+		logger.Debug(
 			"%d\t%s\t%s\t%s\t%s",
 			lw.responseCode,
 			r.Method,
