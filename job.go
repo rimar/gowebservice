@@ -7,6 +7,11 @@ import (
 )
 
 func initJob() {
+	go tick()
+
+}
+
+func tick() {
 	ticker := time.NewTicker(time.Second)
 	defer ticker.Stop()
 
@@ -16,7 +21,6 @@ func initJob() {
 			logger.Info("MEM Usage:", printMemUsage())
 		}
 	}
-
 }
 
 

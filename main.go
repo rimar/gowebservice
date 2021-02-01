@@ -13,6 +13,6 @@ func main() {
 	fmt.Printf("Initializing the database\n")
 	InitDb()
 	defer db.Close()
-	fmt.Printf("Listening on %d\n", port)
+	logger.Warn("Listening on ", port)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", port), router))
 }

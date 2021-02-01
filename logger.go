@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"time"
 )
@@ -35,13 +36,13 @@ func Logger(inner http.Handler, name string) http.Handler {
 		lw := &LoggingWriter{w, 0}
 		inner.ServeHTTP(lw, r)
 
-		logger.Debug(
+		logger.Info(fmt.Sprintf(
 			"%d\t%s\t%s\t%s\t%s",
 			lw.responseCode,
 			r.Method,
 			r.RequestURI,
 			name,
 			time.Since(start),
-		)
+		))
 	})
 }
